@@ -115,8 +115,11 @@ void Engine::CreateMesh() {
 }
 
 void Engine::CreateTextures() {
-	Texture texture("Textures/dirt.png");
-	textureList.push_back(texture);
+	Texture box_diffuse("Textures/box.png");
+	textureList.push_back(box_diffuse);
+
+	Texture box_specular("Textures/box_specular.png");
+	textureList.push_back(box_specular);
 }
 
 void Engine::CreateLights() {
@@ -198,7 +201,7 @@ void Engine::Render() {
 		// Camera
 		camera.HandleKeys(window, deltaTime);
 		camera.HandleMouse(window, deltaTime);
-		
+
 		// Rendering
 		// shaderList[1]->use();
 		// shaderList[1]->SetMatrix4("projection", projection);
@@ -229,19 +232,23 @@ void Engine::Render() {
 
 		shaderList[2]->SetVec3("viewPos", camera.GetPos());
 
-		shaderList[2]->SetVec3("light.ambient", glm::vec3(1.0f, 1.0f, 0.0f));
+		shaderList[2]->SetVec3("light.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
 		shaderList[2]->SetVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
-		shaderList[2]->SetVec3("light.specular", glm::vec3(1.0f, 1.0f, 0.0f));
+		shaderList[2]->SetVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
 
 		// shaderList[2]->SetVec3("material.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
-		shaderList[2]->SetVec3("material.specular", glm::vec3(0.5f, 0.5f, 0.5f));
-		shaderList[2]->SetFloat("material.shininess", 32.0f);
+		// shaderList[2]->SetVec3("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+		shaderList[2]->SetFloat("material.shininess", 64.0f);
 
 		shaderList[2]->SetMatrix4("projection", projection);
 		shaderList[2]->SetMatrix4("view", camera.GetView());
 
-		shaderList[2]->SetInt("material.diffuse", 0);
+		shaderList[2]->SetInt("material.diffuse", textureList[0].GetID());
 		textureList[0].Use();
+
+		shaderList[2]->SetInt("material.specular", textureList[1].GetID());
+		textureList[1].Use();
+
 		instanced.Render(shaderList[2]->ID);
 
 		glfwSwapBuffers(window);
