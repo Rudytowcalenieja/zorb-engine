@@ -227,11 +227,12 @@ void Engine::Render() {
 		// }
 
 		shaderList[2]->use();
-		shaderList[2]->SetVec3("lightPos", glm::vec3(2.0f, 2.0f, 0.0f));
-		shaderList[2]->SetVec3("lightColor", glm::vec3(1.0f, 1.0f, 0.0f));
+		// shaderList[2]->SetVec3("lightPos", glm::vec3(2.0f, 2.0f, 0.0f));
+		// shaderList[2]->SetVec3("lightColor", glm::vec3(1.0f, 1.0f, 0.0f));
 
 		shaderList[2]->SetVec3("viewPos", camera.GetPos());
 
+		shaderList[2]->SetVec3("light.direction", glm::vec3(-0.2f, -1.0f, -0.3f));
 		shaderList[2]->SetVec3("light.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
 		shaderList[2]->SetVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
 		shaderList[2]->SetVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
