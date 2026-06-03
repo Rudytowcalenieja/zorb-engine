@@ -1,4 +1,5 @@
 #include "Instanced.h"
+#include <print>
 
 Instanced::Instanced() {
 	VAO = 0, VBO = 0, IBO = 0, instancedVBO = 0;

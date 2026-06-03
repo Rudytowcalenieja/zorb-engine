@@ -1,5 +1,14 @@
-﻿  Chunk.cpp
-  Engine.cpp
-H:\GIT\zorb-engine\Engine.cpp(190,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
-  Generowanie kodu...
-  zorb-engine.vcxproj -> H:\GIT\zorb-engine\x64\Debug\zorb-engine.exe
+﻿  Instanced.cpp
+H:\GIT\zorb-engine\Instanced.cpp(12,33): error C7595: „std::basic_format_string<char>::basic_format_string”: wywołanie funkcji natychmiastowej nie jest wyrażeniem stałym
+      H:\GIT\zorb-engine\Instanced.cpp(12,35):
+      przyczyną niepowodzenia był odczyt zmiennej poza jej okresem istnienia
+      H:\GIT\zorb-engine\Instanced.cpp(12,35):
+      zobacz użycie elementu „this”
+  
+H:\GIT\zorb-engine\Instanced.cpp(13,34): error C7595: „std::basic_format_string<char>::basic_format_string”: wywołanie funkcji natychmiastowej nie jest wyrażeniem stałym
+      H:\GIT\zorb-engine\Instanced.cpp(13,36):
+      przyczyną niepowodzenia był odczyt zmiennej poza jej okresem istnienia
+      H:\GIT\zorb-engine\Instanced.cpp(13,36):
+      zobacz użycie elementu „verticesCount”
+  
+H:\GIT\zorb-engine\Instanced.cpp(72,67): warning C4267: "argument": konwersja z "size_t" do "GLsizei", możliwa utrata danych

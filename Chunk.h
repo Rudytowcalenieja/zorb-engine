@@ -6,10 +6,16 @@
 
 using BlockID = uint16_t;
 
+static constexpr int SIZE_X = 16;
+static constexpr int SIZE_Y = 256;
+static constexpr int SIZE_Z = 16;
+
+
 class Chunk
 {
 public:
 	Chunk();
+	Chunk(std::array<BlockID, SIZE_X* SIZE_Y* SIZE_Z> chunkData);
 
     bool IsDisplayed() { return isDisplayed; }
 
@@ -18,10 +24,6 @@ public:
 	~Chunk();
 private:
     bool isDisplayed = false;
-
-    static constexpr int SIZE_X = 16;
-    static constexpr int SIZE_Y = 256;
-    static constexpr int SIZE_Z = 16;
 
     std::array<BlockID, SIZE_X* SIZE_Y* SIZE_Z> blocks{};
 
