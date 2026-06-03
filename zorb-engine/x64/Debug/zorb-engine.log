@@ -1,0 +1,5 @@
+﻿  Chunk.cpp
+  Engine.cpp
+H:\GIT\zorb-engine\Engine.cpp(190,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+  Generowanie kodu...
+  zorb-engine.vcxproj -> H:\GIT\zorb-engine\x64\Debug\zorb-engine.exe
