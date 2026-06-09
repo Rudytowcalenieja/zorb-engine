@@ -1,0 +1,24 @@
+﻿  Application.cpp
+  Camera.cpp
+H:\GIT\zorb-engine\Camera.cpp(63,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+H:\GIT\zorb-engine\Camera.cpp(64,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+H:\GIT\zorb-engine\Camera.cpp(68,16): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+H:\GIT\zorb-engine\Camera.cpp(69,16): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+H:\GIT\zorb-engine\Camera.cpp(70,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+H:\GIT\zorb-engine\Camera.cpp(71,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+  Chunk.cpp
+  Engine.cpp
+H:\GIT\zorb-engine\Engine.cpp(190,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+  GameObject.cpp
+  Instanced.cpp
+H:\GIT\zorb-engine\Instanced.cpp(72,67): warning C4267: "argument": konwersja z "size_t" do "GLsizei", możliwa utrata danych
+  Light.cpp
+  main.cpp
+  Mesh.cpp
+  Shader.cpp
+  Terrain.cpp
+H:\GIT\zorb-engine\Terrain.cpp(8,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  Texture.cpp
+  Generowanie kodu...
+LINK : warning LNK4098: domyślna biblioteka „MSVCRT” powoduje konflikt z innymi bibliotekami; użyj opcji /NODEFAULTLIB:biblioteka
+  zorb-engine.vcxproj -> H:\GIT\zorb-engine\x64\Debug\zorb-engine.exe
