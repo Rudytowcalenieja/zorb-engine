@@ -2,7 +2,6 @@
 
 out vec4 fragment;
 
-in vec4 color;
 in vec2 TexCoord;
 in vec3 Normal;
 in vec3 FragPos;
@@ -11,7 +10,6 @@ uniform vec3 viewPos;
 
 uniform sampler2D Texture;
 
-uniform vec3 lightColor;
 uniform vec3 lightPos;
 
 struct Light {

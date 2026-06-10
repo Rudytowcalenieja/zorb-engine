@@ -10,6 +10,7 @@ const char* vertexPath = "Shaders/vertex.glsl";
 const char* instancedPath = "Shaders/instanced.glsl";
 const char* fragmentPath = "Shaders/fragment.glsl";
 const char* lightPath = "Shaders/light.glsl";
+const char* geometryPath = "Shaders/geometry.glsl";
 
 // GLfloat vertices[]{
 // 	-0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
@@ -100,6 +101,9 @@ void Engine::CreateShaders() {
 
 	Shader* instancedShader = new Shader(instancedPath, fragmentPath);
 	shaderList.push_back(instancedShader);
+
+	Shader* geometryShader = new Shader(vertexPath, fragmentPath, geometryPath);
+	shaderList.push_back(geometryShader);
 }
 
 void Engine::CreateMesh() {
@@ -226,6 +230,31 @@ void Engine::Render() {
 		// 	object->Render(shaderList[0]->ID);
 		// }
 
+		// Shader 3
+		shaderList[3]->use();
+		shaderList[3]->SetVec3("lightPos", glm::vec3(2.0f, 2.0f, 0.0f));
+		shaderList[3]->SetVec3("lightColor", glm::vec3(1.0f, 1.0f, 0.0f));
+
+		shaderList[3]->SetVec3("viewPos", camera.GetPos());
+
+		shaderList[3]->SetVec3("light.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
+		shaderList[3]->SetVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
+		shaderList[3]->SetVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+		shaderList[3]->SetFloat("material.shininess", 64.0f);
+
+		shaderList[3]->SetMatrix4("projection", projection);
+		shaderList[3]->SetMatrix4("view", camera.GetView());
+
+		shaderList[3]->SetInt("material.diffuse", textureList[0].GetID());
+		textureList[0].Use();
+
+		shaderList[3]->SetInt("material.specular", textureList[1].GetID());
+		textureList[1].Use();
+
+		gameObjectList[0]->position = glm::vec3(0.0f, 2.0f, 0.0f);
+		gameObjectList[0]->Render(shaderList[3]->ID);
+
+		// Shader 2
 		shaderList[2]->use();
 		shaderList[2]->SetVec3("lightPos", glm::vec3(2.0f, 2.0f, 0.0f));
 		shaderList[2]->SetVec3("lightColor", glm::vec3(1.0f, 1.0f, 0.0f));
