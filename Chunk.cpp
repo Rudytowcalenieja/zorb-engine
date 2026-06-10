@@ -52,9 +52,9 @@ Chunk::Chunk() {
 
 }
 
+// TODO: render each BlockID as other instance then calculate transforms and pass to render
 Chunk::Chunk(std::array<BlockID, SIZE_X * SIZE_Y * SIZE_Z> chunkData, glm::vec3 *transforms) {
 	instanced.CreateMesh(vertices, 192, indices, 36);
-
 	instanced.CreateInstanced(transforms, SIZE_X * SIZE_Z);
 }
 

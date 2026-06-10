@@ -16,22 +16,25 @@ Terrain::Terrain(unsigned int x, unsigned int y)
 {
 	sizeX = x;
 	sizeY = y;
-	height = new int*[sizeX];
-    chunks = new Chunk*[sizeX / 16];
-    for (unsigned int i = 0; i < x; i++) {
-        height[i] = new int[sizeY];
-        chunks[i / 16] = new Chunk[sizeY / 16];
-        for (unsigned int j = 0; j < y; i++) {
-            height[i][j] = GetHeight(i, j);
-        }
-    }
+	// height = new int*[sizeX];
+ //    chunks = new Chunk*[sizeX / 16];
+ //    for (unsigned int i = 0; i < x; i++) {
+ //        height[i] = new int[sizeY];
+ //        chunks[i / 16] = new Chunk[sizeY / 16];
+ //        for (unsigned int j = 0; j < y; i++) {
+ //            height[i][j] = GetHeight(i, j);
+ //            chunks[i / 16][j / 16];
+ //        }
+ //    }
 
-    for (unsigned int i = 0; i < x; i++) {
+	for (int i = 0; i < sizeX * sizeY; i++) {
+		std::array<BlockID, SIZE_X * SIZE_Y * SIZE_Z> blocks;
+		for (int j = 0; j < SIZE_X * SIZE_Z; j++) {
 
-        for (unsigned int j = 0; i < x; i++) {
-            chunks[i]
-        }
-    }
+		}
+		Chunk* chunk = new Chunk(blocks, glm::vec3(0, 0, 0));
+		chunks.insert(std::pair<unsigned int, Chunk*>(i, NULL));
+	}
 }
 
 void Terrain::Render(GLuint shaderID) {

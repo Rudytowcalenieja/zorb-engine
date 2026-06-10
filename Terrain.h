@@ -3,6 +3,8 @@
 #define STB_PERLIN_IMPLEMENTATION
 
 #include <array>
+#include <unordered_map>
+
 #include "Shader.h"
 #include "Chunk.h"
 #include "stb_perlin.h"
@@ -19,7 +21,7 @@ public:
 	~Terrain();
 private:
 	//std::array<Chunk*, MAX_CHUNKS> chunks;
-	Chunk** chunks;
+	std::unordered_map<unsigned int, Chunk*> chunks;
 
 	unsigned int sizeX, sizeY;
 	int** height;
