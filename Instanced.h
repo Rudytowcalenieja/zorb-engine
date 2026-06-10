@@ -5,7 +5,6 @@
 
 #include "Shader.h"
 
-// TODO: create instanced rendering
 class Instanced
 {
 public:

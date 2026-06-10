@@ -3,19 +3,19 @@
 #include <GL/glew.h>
 #include <cstdint>
 #include <array>
+#include "Instanced.h"
 
-using BlockID = uint16_t;
+using BlockID = uint8_t;
 
-static constexpr int SIZE_X = 16;
-static constexpr int SIZE_Y = 256;
-static constexpr int SIZE_Z = 16;
-
+static constexpr unsigned int SIZE_X = 16;
+static constexpr unsigned int SIZE_Y = 256;
+static constexpr unsigned int SIZE_Z = 16;
 
 class Chunk
 {
 public:
 	Chunk();
-	Chunk(std::array<BlockID, SIZE_X* SIZE_Y* SIZE_Z> chunkData);
+	Chunk(std::array<BlockID, SIZE_X * SIZE_Y * SIZE_Z> chunkData, glm::vec3* transforms);
 
     bool IsDisplayed() { return isDisplayed; }
 
@@ -25,7 +25,7 @@ public:
 private:
     bool isDisplayed = false;
 
-    std::array<BlockID, SIZE_X* SIZE_Y* SIZE_Z> blocks{};
+    std::array<BlockID, SIZE_X * SIZE_Y * SIZE_Z> blocks{};
 
     static constexpr int Index(int x, int y, int z)
     {
@@ -41,5 +41,7 @@ private:
     {
         blocks[Index(x, y, z)] = id;
     }
+
+    Instanced instanced;
 };
 

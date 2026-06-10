@@ -10,6 +10,10 @@
 #include <sstream>
 #include <iostream>
 
+namespace ShaderState {
+	inline GLuint activeShader_ID = 0;
+}
+
 class Shader
 {
 public:

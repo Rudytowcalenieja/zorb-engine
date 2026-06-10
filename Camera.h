@@ -19,6 +19,9 @@ public:
 
 	glm::mat4& GetView() { return view; }
 	glm::vec3& GetPos() { return position; }
+	glm::vec3& GetFront() { return camFront; }
+	glm::vec3& GetUp() { return camUp; }
+	glm::vec3& GetRight() { return camRight; }
 
 	~Camera();
 private:
