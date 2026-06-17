@@ -1,28 +1,27 @@
 #pragma once
 
-#define STB_PERLIN_IMPLEMENTATION
-
 #include <array>
 #include <unordered_map>
 
-#include "Shader.h"
-#include "Chunk.h"
 #include "stb_perlin.h"
+#include "Chunk.h"
+#include "Frustum.h"
 
 static constexpr unsigned int MAX_CHUNKS = 16;
 
 class Terrain
 {
 public:
-	Terrain(unsigned int x, unsigned int y);
+	Terrain();
 
-	void Render(GLuint shaderID);
+	void GenerateTerrain(unsigned int x, unsigned int y);
+
+	void Render(GLuint shaderID, Frustum frustum);
 
 	~Terrain();
 private:
-	//std::array<Chunk*, MAX_CHUNKS> chunks;
 	std::unordered_map<unsigned int, Chunk*> chunks;
 
-	unsigned int sizeX, sizeY;
+	unsigned int sizeX, sizeZ;
 	int** height;
 };

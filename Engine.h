@@ -19,6 +19,8 @@
 #include "Camera.h"
 #include "GameObject.h"
 #include "Light.h"
+#include "Instanced.h"
+#include "Terrain.h"
 
 class Engine
 {
@@ -56,5 +58,7 @@ private:
 	glm::mat4 projection;
 	glm::mat4 view;
 	glm::mat4 model;
+
+	Frustum frustum;
 };
 

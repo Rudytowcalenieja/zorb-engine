@@ -1,7 +1,5 @@
 #include "Engine.h"
 
-#include "Instanced.h"
-
 const char* WINDOW_TITLE = "Simple Engine";
 const int WINDOW_WIDTH = 1200;
 const int WINDOW_HEIGHT = 800;
@@ -72,6 +70,7 @@ GLuint indices[] = {
 };
 
 Instanced instanced;
+Terrain terrain;
 
 void error_callback(int error, const char* description)
 {
@@ -107,15 +106,11 @@ void Engine::CreateShaders() {
 }
 
 void Engine::CreateMesh() {
-	/*Mesh* cube = new Mesh();
-	cube->Create(cubeVertices, 120, cubeIndices, 36);
-	meshList.push_back(cube);
-	meshList.push_back(cube);*/
-
 	GameObject* object = new GameObject();
 	gameObjectList.push_back(object);
 
 	instanced.CreateMesh(vertices, 192, indices, 36);
+	terrain.GenerateTerrain(4, 4);
 }
 
 void Engine::CreateTextures() {
@@ -206,54 +201,6 @@ void Engine::Render() {
 		camera.HandleKeys(window, deltaTime);
 		camera.HandleMouse(window, deltaTime);
 
-		// Rendering
-		// shaderList[1]->use();
-		// shaderList[1]->SetMatrix4("projection", projection);
-		// shaderList[1]->SetMatrix4("view", camera.GetView());
-		//
-		// // Lights
-		// model = glm::mat4(1.0f);
-		// shaderList[1]->SetMatrix4("model", model);
-		// // lightList[0]->Render(shaderList[1]->ID);
-		//
-		// // Objects
-		// shaderList[0]->use();
-		// shaderList[0]->SetVec3("lightPos", glm::vec3(2.0f, 2.0f, 0.0f));
-		// shaderList[0]->SetVec3("lightColor", glm::vec3(0.0f, 1.0f, 0.0f));
-		// shaderList[0]->SetMatrix4("projection", projection);
-		// shaderList[0]->SetMatrix4("view", camera.GetView());
-
-		// gameObjectList[0]->position = glm::vec3(1.0f, 0.0f, 1.0f);
-
-		// for (GameObject* object : gameObjectList) {
-		// 	object->Update();
-		// 	object->Render(shaderList[0]->ID);
-		// }
-
-		// Shader 3
-		shaderList[3]->use();
-		shaderList[3]->SetVec3("lightPos", glm::vec3(2.0f, 2.0f, 0.0f));
-		shaderList[3]->SetVec3("lightColor", glm::vec3(1.0f, 1.0f, 0.0f));
-
-		shaderList[3]->SetVec3("viewPos", camera.GetPos());
-
-		shaderList[3]->SetVec3("light.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
-		shaderList[3]->SetVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
-		shaderList[3]->SetVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-		shaderList[3]->SetFloat("material.shininess", 64.0f);
-
-		shaderList[3]->SetMatrix4("projection", projection);
-		shaderList[3]->SetMatrix4("view", camera.GetView());
-
-		shaderList[3]->SetInt("material.diffuse", textureList[0].GetID());
-		textureList[0].Use();
-
-		shaderList[3]->SetInt("material.specular", textureList[1].GetID());
-		textureList[1].Use();
-
-		gameObjectList[0]->position = glm::vec3(0.0f, 2.0f, 0.0f);
-		gameObjectList[0]->Render(shaderList[3]->ID);
-
 		// Shader 2
 		shaderList[2]->use();
 		shaderList[2]->SetVec3("lightPos", glm::vec3(2.0f, 2.0f, 0.0f));
@@ -265,12 +212,11 @@ void Engine::Render() {
 		shaderList[2]->SetVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
 		shaderList[2]->SetVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
 
-		// shaderList[2]->SetVec3("material.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
-		// shaderList[2]->SetVec3("material.specular", glm::vec3(1.0f, 1.0f, 1.0f));
 		shaderList[2]->SetFloat("material.shininess", 64.0f);
 
 		shaderList[2]->SetMatrix4("projection", projection);
 		shaderList[2]->SetMatrix4("view", camera.GetView());
+		frustum.Update(view * projection);
 
 		shaderList[2]->SetInt("material.diffuse", textureList[0].GetID());
 		textureList[0].Use();
@@ -278,7 +224,9 @@ void Engine::Render() {
 		shaderList[2]->SetInt("material.specular", textureList[1].GetID());
 		textureList[1].Use();
 
+		// TODO fix that, pls
 		instanced.Render(shaderList[2]->ID);
+		terrain.Render(shaderList[2]->ID, frustum);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -289,4 +237,5 @@ void Engine::Render() {
 Engine::~Engine() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
+	terrain.~Terrain();
 }

@@ -7,10 +7,10 @@ Instanced::Instanced() {
 void Instanced::CreateMesh(GLfloat* vertices, GLuint verticesCount, GLuint* indices, GLuint indicesCount) {
 	count = indicesCount;
 
-	printf("--- Instanced ---\n");
-	printf("Indices count: %d\n", count);
-	printf("Vertices count: %d\n", verticesCount);
-	printf("--- Instanced ---\n");
+	// printf("--- Instanced ---\n");
+	// printf("Indices count: %d\n", count);
+	// printf("Vertices count: %d\n", verticesCount);
+	// printf("--- Instanced ---\n");
 
 	// Gen
 	glGenVertexArrays(1, &VAO);
@@ -52,7 +52,7 @@ void Instanced::CreateInstanced(glm::vec3* vectors, size_t size) {
 
 	glGenBuffers(1, &instancedVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, instancedVBO);
-	glBufferData(GL_ARRAY_BUFFER, transform_size * sizeof(glm::vec3), &transform[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, size * sizeof(glm::vec3), transform, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(3);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)0);
@@ -60,11 +60,16 @@ void Instanced::CreateInstanced(glm::vec3* vectors, size_t size) {
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	delete[] transform;
+}
+
+void Instanced::Transform(glm::vec3 position) {
+	this->position = position;
 }
 
 void Instanced::Render(const GLuint shaderID) {
 	model = glm::mat4(1.0f);
-
+	model = glm::translate(model, position);
 	Shader::SetMatrix4(shaderID, "model", model);
 
 	glBindVertexArray(VAO);
